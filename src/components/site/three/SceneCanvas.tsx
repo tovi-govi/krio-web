@@ -1,6 +1,5 @@
 import { Suspense, lazy, useRef, useState, useEffect } from "react";
 import { Canvas } from "@react-three/fiber";
-import { useIsMobile } from "@/hooks/use-mobile";
 
 interface SceneCanvasProps {
   children: React.ReactNode;
@@ -17,7 +16,6 @@ export function SceneCanvas({
 }: SceneCanvasProps) {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
-  const isMobile = useIsMobile();
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -32,11 +30,6 @@ export function SceneCanvas({
     if (ref.current) observer.observe(ref.current);
     return () => observer.disconnect();
   }, []);
-
-  // On small screens we avoid mounting a full WebGL canvas to save memory/battery.
-  if (isMobile) {
-    return <div ref={ref} className={className} aria-hidden />;
-  }
 
   return (
     <div ref={ref} className={className}>

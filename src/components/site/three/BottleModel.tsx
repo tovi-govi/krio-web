@@ -48,6 +48,7 @@ export function BottleModel({
 }: BottleModelProps) {
   const gltf = useGLTF(modelUrl) as GLTF;
   const spinRef = useRef<Group>(null);
+  const waterMaterialRef = useRef<MeshPhysicalMaterial | null>(null);
   const clonedScene = useMemo(() => {
     const clone = gltf.scene.clone(true);
     clone.traverse((obj) => {
@@ -63,14 +64,33 @@ export function BottleModel({
 
         // Apply improved material handling for a more premium plastic look
         const applyMaterial = (mat: Material) => {
+          const lname = (mesh.name || "").toLowerCase();
+          const isLabelMesh = lname.includes("label") || lname.includes("sticker") || lname.includes("wrap");
+          const isWaterMesh = lname.includes("water");
           const m = flipMaterialText(mat);
-          // If this is the 20L model, enhance plastics and labels
+
+          // If this is the 20L model, apply target materials for glass, cap, label and water volume
           if (modelUrl === bottle20LUrl) {
-            const lname = (mesh.name || "").toLowerCase();
-            // Bodies: names containing 'bottle' or 'body' get transparent physical material
-            if (lname.includes("bottle") || lname.includes("body") || lname.includes("jug") || lname.includes("container")) {
+            if (isWaterMesh) {
+              const waterMat = new MeshPhysicalMaterial({
+                color: 0x84c7ff,
+                transparent: true,
+                opacity: 0.72,
+                transmission: 0.92,
+                roughness: 0.05,
+                metalness: 0,
+                clearcoat: 0.15,
+                clearcoatRoughness: 0.1,
+                ior: 1.33,
+                reflectivity: 0.35,
+              });
+              waterMaterialRef.current = waterMat;
+              return waterMat as unknown as Material;
+            }
+
+            if (lname.includes("bottle") || lname.includes("body") || lname.includes("jug") || lname.includes("container") || lname.includes("shell")) {
               const baseMap = (m as any).map || null;
-              const phys = new MeshPhysicalMaterial({
+              return new MeshPhysicalMaterial({
                 transparent: true,
                 transmission: 0.92,
                 roughness: 0.12,
@@ -80,24 +100,19 @@ export function BottleModel({
                 envMapIntensity: 1.2,
                 color: 0xffffff,
                 map: baseMap,
-              });
-              return phys as unknown as Material;
+              }) as unknown as Material;
             }
 
-            // Caps/neck: solid colored plastic
             if (lname.includes("cap") || lname.includes("neck") || lname.includes("lid")) {
-              const cap = new MeshPhysicalMaterial({
-                color: 0x12a09b, // teal-ish cap color to match brand
+              return new MeshPhysicalMaterial({
+                color: 0x12a09b,
                 roughness: 0.18,
                 metalness: 0.05,
                 clearcoat: 0.06,
-              });
-              return cap as unknown as Material;
+              }) as unknown as Material;
             }
 
-            // Labels: try to apply the provided label texture if mesh name includes 'label'
-            if (lname.includes("label") || lname.includes("sticker") || lname.includes("wrap")) {
-              // We'll set the texture later via useTexture; keep current material for now
+            if (isLabelMesh) {
               return m;
             }
           }
@@ -136,9 +151,16 @@ export function BottleModel({
     });
   }
 
-  useFrame((_, delta) => {
+  useFrame((state, delta) => {
     if (spinRef.current) {
       spinRef.current.rotation.y += delta * BOTTLE_ROTATION_SPEED;
+    }
+
+    if (waterMaterialRef.current) {
+      const t = state.clock.getElapsedTime();
+      waterMaterialRef.current.thickness = 0.14 + Math.sin(t * 1.3) * 0.015;
+      waterMaterialRef.current.ior = 1.33 + Math.sin(t * 0.6) * 0.007;
+      waterMaterialRef.current.clearcoatRoughness = 0.09 + Math.sin(t * 0.8) * 0.008;
     }
   });
 

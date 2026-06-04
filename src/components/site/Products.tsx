@@ -63,7 +63,7 @@ const MODEL_OPTIONS: BottleModelOption[] = [
   { model: bottle500mlUrl, scale: 0.32, rotation: [-1.3, 0, 0.06] },
   { model: bottle1LUrl, scale: 0.37, rotation: [-1.4, 0, 0.08] },
   { model: bottle2LUrl, scale: 0.37, rotation: [-1.18, 0, 0.1] },
-  { model: bottle20LUrl, scale: 0.40, rotation: [-1.0, 0, 0.14] },
+  { model: bottle20LUrl, scale: 3.90, rotation: [0, 0, 0.14] },
 ];
 
 export function Products() {
