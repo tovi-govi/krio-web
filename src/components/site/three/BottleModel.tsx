@@ -179,8 +179,3 @@ export function BottleModel({
   );
 }
 
-useGLTF.preload(bottle200mlUrl);
-useGLTF.preload(bottle500mlUrl);
-useGLTF.preload(bottle1LUrl);
-useGLTF.preload(bottle2LUrl);
-useGLTF.preload(bottle20LUrl);

@@ -76,6 +76,8 @@ export function Customers() {
                     <img
                       src={c.logo}
                       alt={`${c.name} logo`}
+                      loading="lazy"
+                      decoding="async"
                       className={`max-h-8 w-auto max-w-full object-contain ${c.logoClassName ?? ""}`}
                     />
                   </span>

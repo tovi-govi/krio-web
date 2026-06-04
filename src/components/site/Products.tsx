@@ -1,15 +1,16 @@
 import { Check, ChevronLeft, ChevronRight } from "lucide-react";
-import { useState } from "react";
+import { useState, lazy, Suspense } from "react";
 import { ScrollReveal } from "./ScrollReveal";
 import { useRevealOnScroll } from "./useRevealOnScroll";
-import { SceneCanvas } from "./three/SceneCanvas";
-import { BottleModel } from "./three/BottleModel";
 import bottle200mlUrl from "@/assets/krio_h2o_5_models_pack/krio_h2o_200ml.glb?url";
 import bottle500mlUrl from "@/assets/krio_h2o_5_models_pack/krio_h2o_500ml.glb?url";
 import bottle1LUrl from "@/assets/krio_h2o_5_models_pack/krio_h2o_1litre.glb?url";
 import bottle2LUrl from "@/assets/krio_h2o_5_models_pack/krio_h2o_2litre.glb?url";
 import bottle20LUrl from "@/assets/krio_h2o_5_models_pack/krio_h2o_20litre.glb?url";
 import { motion, AnimatePresence } from "framer-motion";
+
+const SceneCanvas = lazy(() => import("./three/SceneCanvas").then((mod) => ({ default: mod.SceneCanvas })));
+const BottleModel = lazy(() => import("./three/BottleModel").then((mod) => ({ default: mod.BottleModel })));
 
 const SIZES = [
   {
@@ -122,13 +123,21 @@ export function Products() {
                     exit={{ opacity: 0, x: -direction * 120 }}
                     transition={{ duration: 0.4, ease: [0.43, 0.13, 0.23, 0.96] }}
                   >
-                    <SceneCanvas className="relative h-full w-full" camera={{ position: [0, 0.7, 6], fov: 28 }}>
-                      <BottleModel
-                        modelUrl={MODEL_OPTIONS[active].model}
-                        scale={MODEL_OPTIONS[active].scale}
-                        rotation={MODEL_OPTIONS[active].rotation}
-                      />
-                    </SceneCanvas>
+                    <Suspense
+                  fallback={
+                    <div className="absolute inset-0 grid place-items-center text-sm text-muted-foreground">
+                      Loading 3D preview…
+                    </div>
+                  }
+                >
+                  <SceneCanvas className="relative h-full w-full" camera={{ position: [0, 0.7, 6], fov: 28 }}>
+                    <BottleModel
+                      modelUrl={MODEL_OPTIONS[active].model}
+                      scale={MODEL_OPTIONS[active].scale}
+                      rotation={MODEL_OPTIONS[active].rotation}
+                    />
+                  </SceneCanvas>
+                </Suspense>
                   </motion.div>
                 </AnimatePresence>
                 <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-background/95 via-background/70 to-transparent p-6">

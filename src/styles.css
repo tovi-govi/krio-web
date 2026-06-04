@@ -361,3 +361,48 @@
     animation: fade-up 0.8s var(--transition-smooth) both;
   }
 }
+
+/* Mobile-specific adjustments to improve touch targets and layout */
+@media (max-width: 767px) {
+  :root {
+    --type-scale-1: 2.25rem; /* h1 */
+    --type-scale-2: 1.5rem; /* h2 */
+    --type-scale-3: 1.125rem; /* h3 */
+  }
+
+  /* Slightly reduce hero height so content fits above the fold on many phones */
+  .min-h-screen {
+    min-height: calc(100vh - 4rem);
+  }
+
+  /* Ensure media scales down and doesn't overflow */
+  img,
+  video,
+  canvas {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* Larger touch targets for controls */
+  button,
+  .button,
+  .btn {
+    min-height: 44px;
+    padding-inline: 12px;
+    font-size: 1rem;
+  }
+
+  /* Space the mobile nav items more generously */
+  header nav a,
+  header nav button {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Reduce heavy visual effects on mobile for performance */
+  .shadow-glow,
+  .animate-float {
+    animation: none;
+    box-shadow: none;
+  }
+}

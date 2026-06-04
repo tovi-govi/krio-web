@@ -134,7 +134,7 @@ export function Hero() {
       {showVideo && (
         <video
           ref={videoRef}
-          autoPlay muted loop playsInline preload="metadata"
+          autoPlay muted loop playsInline preload="none"
           poster={waterSplash}
           disablePictureInPicture
           className="pointer-events-none absolute inset-0 hidden h-full w-full object-cover md:block"
