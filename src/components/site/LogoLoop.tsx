@@ -65,6 +65,7 @@ function useAnimationLoop(
   isHovered: boolean,
   hoverSpeed: number | undefined,
   isVertical: boolean,
+  isIntersecting: boolean,
 ) {
   const rafRef = useRef<number | null>(null);
   const lastTimestampRef = useRef<number | null>(null);
@@ -72,6 +73,11 @@ function useAnimationLoop(
   const velocityRef = useRef(0);
 
   useEffect(() => {
+    if (!isIntersecting) {
+      lastTimestampRef.current = null;
+      return;
+    }
+
     const track = trackRef.current;
     if (!track) return;
 
@@ -118,7 +124,16 @@ function useAnimationLoop(
       }
       lastTimestampRef.current = null;
     };
-  }, [targetVelocity, seqWidth, seqHeight, isHovered, hoverSpeed, isVertical, trackRef]);
+  }, [
+    targetVelocity,
+    seqWidth,
+    seqHeight,
+    isHovered,
+    hoverSpeed,
+    isVertical,
+    trackRef,
+    isIntersecting,
+  ]);
 }
 
 export const LogoLoop = memo(function LogoLoop({
@@ -146,6 +161,20 @@ export const LogoLoop = memo(function LogoLoop({
   const [seqHeight, setSeqHeight] = useState(0);
   const [copyCount, setCopyCount] = useState(ANIMATION_CONFIG.MIN_COPIES);
   const [isHovered, setIsHovered] = useState(false);
+  const [isIntersecting, setIsIntersecting] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsIntersecting(entry.isIntersecting);
+      },
+      { rootMargin: "100px" },
+    );
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+    return () => observer.disconnect();
+  }, []);
 
   const effectiveHoverSpeed = useMemo(() => {
     if (hoverSpeed !== undefined) return hoverSpeed;
@@ -263,6 +292,7 @@ export const LogoLoop = memo(function LogoLoop({
     isHovered,
     effectiveHoverSpeed,
     isVertical,
+    isIntersecting,
   );
 
   const cssVariables = useMemo<CSSVariableStyle>(

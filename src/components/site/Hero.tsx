@@ -39,18 +39,18 @@ function AnimatedWave() {
 }
 
 // Floating droplets background
-function FloatingDroplets() {
-  const drops = Array.from({ length: 12 }, (_, i) => ({
-    id: i,
-    left: `${8 + i * 7.5}%`,
-    delay: i * 0.4,
-    duration: 3 + (i % 4),
-    size: 4 + (i % 3) * 4,
-  }));
+const FLOATING_DROPS = Array.from({ length: 12 }, (_, i) => ({
+  id: i,
+  left: `${8 + i * 7.5}%`,
+  delay: i * 0.4,
+  duration: 3 + (i % 4),
+  size: 4 + (i % 3) * 4,
+}));
 
+function FloatingDroplets() {
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      {drops.map((d) => (
+      {FLOATING_DROPS.map((d) => (
         <motion.div
           key={d.id}
           className="absolute rounded-full bg-blue-300/20 backdrop-blur-sm border border-blue-200/30"

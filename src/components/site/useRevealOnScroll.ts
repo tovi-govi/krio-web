@@ -5,50 +5,27 @@ export function useRevealOnScroll<T extends HTMLElement>(revealPoint = 0.78) {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    let frame = 0;
-    let lastVisible = false;
+    if (!ref.current) return;
 
-    const update = () => {
-      frame = 0;
+    // A revealPoint of 0.78 means it triggers when the element enters 78% of the viewport from the top.
+    // That means the bottom margin is -22% of the viewport height.
+    const bottomMarginPercent = Math.round((1 - revealPoint) * 100);
 
-      if (!ref.current) {
-        return;
-      }
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect(); // Once revealed, it stays revealed
+        }
+      },
+      {
+        rootMargin: `0px 0px -${bottomMarginPercent}% 0px`,
+        threshold: 0,
+      },
+    );
 
-      const top = ref.current.getBoundingClientRect().top;
-      const revealLine = window.innerHeight * revealPoint;
-      let nextVisible = lastVisible;
-
-      if (!lastVisible && top <= revealLine) {
-        nextVisible = true;
-      }
-
-      if (nextVisible !== lastVisible) {
-        lastVisible = nextVisible;
-        setIsVisible(nextVisible);
-      }
-    };
-
-    const requestUpdate = () => {
-      if (frame) {
-        return;
-      }
-
-      frame = window.requestAnimationFrame(update);
-    };
-
-    update();
-    window.addEventListener("scroll", requestUpdate, { passive: true });
-    window.addEventListener("resize", requestUpdate);
-
-    return () => {
-      if (frame) {
-        window.cancelAnimationFrame(frame);
-      }
-
-      window.removeEventListener("scroll", requestUpdate);
-      window.removeEventListener("resize", requestUpdate);
-    };
+    observer.observe(ref.current);
+    return () => observer.disconnect();
   }, [revealPoint]);
 
   return { isVisible, ref };

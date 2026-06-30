@@ -1,4 +1,4 @@
-import { useMemo, useRef } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import {
   Center,
   Float,
@@ -147,7 +147,8 @@ export function BottleModel({
 
   // Load label texture (we'll only apply it for the 20L model)
   const labelTex = useTexture(label20Url);
-  if (modelUrl === bottle20LUrl && labelTex) {
+  useEffect(() => {
+    if (modelUrl !== bottle20LUrl || !labelTex) return;
     clonedScene.traverse((obj) => {
       if (obj.type === "Mesh") {
         const mesh = obj as Mesh;
@@ -164,7 +165,7 @@ export function BottleModel({
         }
       }
     });
-  }
+  }, [clonedScene, modelUrl, labelTex]);
 
   useFrame((state, delta) => {
     if (spinRef.current) {

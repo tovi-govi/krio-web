@@ -16,19 +16,19 @@ export function EyeIcon3D() {
     <group ref={groupRef}>
       <mesh>
         <torusGeometry args={[0.35, 0.06, 12, 32]} />
-        <meshPhysicalMaterial color="#005CB9" roughness={0.2} metalness={0.6} />
+        <meshStandardMaterial color="#005CB9" roughness={0.2} metalness={0.6} />
       </mesh>
       <mesh position={[0, 0, 0.08]}>
         <circleGeometry args={[0.2, 24]} />
-        <meshPhysicalMaterial color="#1a7fca" roughness={0.1} metalness={0.3} />
+        <meshStandardMaterial color="#1a7fca" roughness={0.1} metalness={0.3} />
       </mesh>
       <mesh position={[0, 0, 0.16]}>
         <circleGeometry args={[0.1, 24]} />
-        <meshPhysicalMaterial color="#003B8F" roughness={0.3} metalness={0.2} />
+        <meshStandardMaterial color="#003B8F" roughness={0.3} metalness={0.2} />
       </mesh>
       <mesh position={[0.06, 0.05, 0.22]}>
         <sphereGeometry args={[0.03, 8, 8]} />
-        <meshPhysicalMaterial
+        <meshStandardMaterial
           color="#ffffff"
           roughness={0}
           metalness={0}
@@ -57,15 +57,15 @@ export function TargetIcon3D() {
     <group ref={groupRef}>
       <mesh>
         <torusGeometry args={[0.38, 0.055, 12, 32]} />
-        <meshPhysicalMaterial color="#67B346" roughness={0.2} metalness={0.5} />
+        <meshStandardMaterial color="#67B346" roughness={0.2} metalness={0.5} />
       </mesh>
       <mesh>
         <torusGeometry args={[0.26, 0.045, 12, 32]} />
-        <meshPhysicalMaterial color="#005CB9" roughness={0.2} metalness={0.5} />
+        <meshStandardMaterial color="#005CB9" roughness={0.2} metalness={0.5} />
       </mesh>
       <mesh ref={innerRef}>
         <sphereGeometry args={[0.09, 16, 16]} />
-        <meshPhysicalMaterial
+        <meshStandardMaterial
           color="#003B8F"
           roughness={0.1}
           metalness={0.6}
@@ -97,7 +97,7 @@ export function TargetIcon3D() {
       ].map((c, i) => (
         <mesh key={i} position={c.pos}>
           <boxGeometry args={c.size} />
-          <meshPhysicalMaterial color="#67B346" roughness={0.3} />
+          <meshStandardMaterial color="#67B346" roughness={0.3} />
         </mesh>
       ))}
     </group>
@@ -121,7 +121,7 @@ export function EarthLeafIcon3D() {
     <group ref={groupRef}>
       <mesh>
         <sphereGeometry args={[0.3, 24, 24]} />
-        <meshPhysicalMaterial
+        <meshStandardMaterial
           color="#1a7fca"
           roughness={0.15}
           metalness={0.1}
@@ -131,16 +131,16 @@ export function EarthLeafIcon3D() {
       </mesh>
       <mesh rotation={[0, 0, 0]}>
         <torusGeometry args={[0.31, 0.015, 8, 32]} />
-        <meshPhysicalMaterial color="#67B346" roughness={0.3} />
+        <meshStandardMaterial color="#67B346" roughness={0.3} />
       </mesh>
       <mesh rotation={[Math.PI / 2, 0, 0]}>
         <torusGeometry args={[0.31, 0.015, 8, 32]} />
-        <meshPhysicalMaterial color="#67B346" roughness={0.3} />
+        <meshStandardMaterial color="#67B346" roughness={0.3} />
       </mesh>
       <group ref={leafRef} position={[0.15, 0.25, 0.2]}>
         <mesh rotation={[0, 0, Math.PI / 5]}>
           <coneGeometry args={[0.11, 0.22, 3]} />
-          <meshPhysicalMaterial
+          <meshStandardMaterial
             color="#67B346"
             roughness={0.3}
             metalness={0.1}
@@ -192,7 +192,7 @@ export function DropletIcon3D() {
       </mesh>
       <mesh position={[-0.06, 0.02, 0.18]}>
         <sphereGeometry args={[0.04, 8, 8]} />
-        <meshPhysicalMaterial
+        <meshStandardMaterial
           color="#ffffff"
           roughness={0}
           metalness={0}
@@ -242,12 +242,12 @@ export function ShieldIcon3D() {
     <group ref={groupRef}>
       <mesh>
         <extrudeGeometry args={[shieldShape, extrudeSettings]} />
-        <meshPhysicalMaterial color="#005CB9" roughness={0.2} metalness={0.5} />
+        <meshStandardMaterial color="#005CB9" roughness={0.2} metalness={0.5} />
       </mesh>
       {/* checkmark left stroke */}
       <mesh position={[-0.07, -0.06, 0.12]} rotation={[0, 0, -0.6]}>
         <boxGeometry args={[0.16, 0.055, 0.055]} />
-        <meshPhysicalMaterial
+        <meshStandardMaterial
           color="#ffffff"
           roughness={0.2}
           emissive="#ffffff"
@@ -257,7 +257,7 @@ export function ShieldIcon3D() {
       {/* checkmark right stroke */}
       <mesh position={[0.07, 0.02, 0.12]} rotation={[0, 0, 0.85]}>
         <boxGeometry args={[0.055, 0.26, 0.055]} />
-        <meshPhysicalMaterial
+        <meshStandardMaterial
           color="#ffffff"
           roughness={0.2}
           emissive="#ffffff"
@@ -283,21 +283,21 @@ export function TruckIcon3D() {
     <group ref={groupRef} scale={[0.9, 0.9, 0.9]}>
       <mesh position={[-0.1, 0.08, 0]}>
         <boxGeometry args={[0.28, 0.28, 0.22]} />
-        <meshPhysicalMaterial color="#003B8F" roughness={0.3} metalness={0.4} />
+        <meshStandardMaterial color="#003B8F" roughness={0.3} metalness={0.4} />
       </mesh>
       <mesh position={[0.18, 0, 0]}>
         <boxGeometry args={[0.34, 0.22, 0.24]} />
-        <meshPhysicalMaterial color="#005CB9" roughness={0.3} metalness={0.3} />
+        <meshStandardMaterial color="#005CB9" roughness={0.3} metalness={0.3} />
       </mesh>
       {([-0.18, 0.22] as number[]).map((x, i) => (
         <mesh key={i} position={[x, -0.16, 0]} rotation={[Math.PI / 2, 0, 0]}>
           <torusGeometry args={[0.09, 0.035, 8, 16]} />
-          <meshPhysicalMaterial color="#1a1a1a" roughness={0.7} />
+          <meshStandardMaterial color="#1a1a1a" roughness={0.7} />
         </mesh>
       ))}
       <mesh position={[-0.25, 0.06, 0.05]}>
         <sphereGeometry args={[0.035, 8, 8]} />
-        <meshPhysicalMaterial
+        <meshStandardMaterial
           color="#ffff99"
           emissive="#ffff88"
           emissiveIntensity={2}
@@ -322,12 +322,12 @@ export function HeadphonesIcon3D() {
     <group ref={groupRef}>
       <mesh rotation={[0, 0, 0]}>
         <torusGeometry args={[0.28, 0.04, 12, 24, Math.PI]} />
-        <meshPhysicalMaterial color="#67B346" roughness={0.2} metalness={0.5} />
+        <meshStandardMaterial color="#67B346" roughness={0.2} metalness={0.5} />
       </mesh>
       {([-1, 1] as number[]).map((side, i) => (
         <mesh key={i} position={[side * 0.28, 0, 0]}>
           <cylinderGeometry args={[0.09, 0.09, 0.1, 16]} />
-          <meshPhysicalMaterial color="#005CB9" roughness={0.3} metalness={0.4} />
+          <meshStandardMaterial color="#005CB9" roughness={0.3} metalness={0.4} />
         </mesh>
       ))}
     </group>
