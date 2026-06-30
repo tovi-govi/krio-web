@@ -73,10 +73,17 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "Krio-H₂O — Pure, Safe, Sustainable Drinking Water" },
-      { name: "description", content: "Krio-H₂O delivers purified, mineral-balanced drinking water across Telangana. Wellness in every drop — from 200 ml bottles to 20 L jars." },
+      {
+        name: "description",
+        content:
+          "Krio-H₂O delivers purified, mineral-balanced drinking water across Telangana. Wellness in every drop — from 200 ml bottles to 20 L jars.",
+      },
       { name: "author", content: "Krio-H₂O" },
       { property: "og:title", content: "Krio-H₂O — Wellness in Every Drop" },
-      { property: "og:description", content: "Pure, safe and sustainable drinking water delivered across Telangana." },
+      {
+        property: "og:description",
+        content: "Pure, safe and sustainable drinking water delivered across Telangana.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },

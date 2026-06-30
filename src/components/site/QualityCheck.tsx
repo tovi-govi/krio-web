@@ -1,5 +1,13 @@
 import { useMemo, useState } from "react";
-import { Building2, Check, Droplets, FlaskConical, ShieldCheck, ThumbsUp, Truck } from "lucide-react";
+import {
+  Building2,
+  Check,
+  Droplets,
+  FlaskConical,
+  ShieldCheck,
+  ThumbsUp,
+  Truck,
+} from "lucide-react";
 import { motion } from "framer-motion";
 import { ScrollReveal } from "./ScrollReveal";
 import { useRevealOnScroll } from "./useRevealOnScroll";

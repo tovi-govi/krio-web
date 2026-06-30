@@ -4,7 +4,12 @@ export function Logo({ className = "" }: { className?: string }) {
   return (
     <a href="#top" className={`group inline-flex items-center gap-2.5 ${className}`}>
       <span className="relative flex h-11 w-[52px] shrink-0 items-center justify-center">
-        <img src={krioLogo} alt="" className="h-full w-full object-contain drop-shadow-sm" aria-hidden />
+        <img
+          src={krioLogo}
+          alt=""
+          className="h-full w-full object-contain drop-shadow-sm"
+          aria-hidden
+        />
       </span>
       <span className="font-display text-xl font-extrabold tracking-tight text-foreground">
         Krio-<span className="text-secondary">H</span>

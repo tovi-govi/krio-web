@@ -197,7 +197,8 @@ export const LogoLoop = memo(function LogoLoop({
 
     if (sequenceWidth > 0) {
       setSeqWidth(Math.ceil(sequenceWidth));
-      const copiesNeeded = Math.ceil(containerWidth / sequenceWidth) + ANIMATION_CONFIG.COPY_HEADROOM;
+      const copiesNeeded =
+        Math.ceil(containerWidth / sequenceWidth) + ANIMATION_CONFIG.COPY_HEADROOM;
       setCopyCount(Math.max(ANIMATION_CONFIG.MIN_COPIES, copiesNeeded));
     }
   }, [isVertical]);

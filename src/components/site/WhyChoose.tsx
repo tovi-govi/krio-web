@@ -2,7 +2,12 @@ import { motion } from "framer-motion";
 import { ScrollReveal } from "./ScrollReveal";
 import { useRevealOnScroll } from "./useRevealOnScroll";
 import { SceneCanvas } from "./three/SceneCanvas";
-import { DropletIcon3D, ShieldIcon3D, TruckIcon3D, HeadphonesIcon3D } from "./three/AnimatedIcons3D";
+import {
+  DropletIcon3D,
+  ShieldIcon3D,
+  TruckIcon3D,
+  HeadphonesIcon3D,
+} from "./three/AnimatedIcons3D";
 
 const FEATURES = [
   {

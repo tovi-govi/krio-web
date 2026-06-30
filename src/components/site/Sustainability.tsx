@@ -46,10 +46,7 @@ export function Sustainability() {
                 animate={{ scale: [1, 1.1, 1] }}
                 transition={{ duration: 4, repeat: Infinity }}
               />
-              <SceneCanvas
-                className="h-[400px] w-full"
-                camera={{ position: [0, 0, 3.2], fov: 45 }}
-              >
+              <SceneCanvas className="h-[400px] w-full" camera={{ position: [0, 0, 3.2], fov: 45 }}>
                 <Globe3D />
               </SceneCanvas>
             </div>
@@ -87,7 +84,9 @@ export function Sustainability() {
                   </span>
                   <div>
                     <div className="text-sm font-semibold text-foreground">{title}</div>
-                    <div className="mt-0.5 text-xs leading-relaxed text-muted-foreground">{body}</div>
+                    <div className="mt-0.5 text-xs leading-relaxed text-muted-foreground">
+                      {body}
+                    </div>
                   </div>
                 </ScrollReveal>
               ))}

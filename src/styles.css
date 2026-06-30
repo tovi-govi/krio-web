@@ -86,19 +86,9 @@
   --input: #e6f5fb;
   --ring: #5bd2f9;
 
-  --gradient-hero: linear-gradient(
-    135deg,
-    #f2fbff 0%,
-    #d9f3ff 56%,
-    #c9eefb 100%
-  );
+  --gradient-hero: linear-gradient(135deg, #f2fbff 0%, #d9f3ff 56%, #c9eefb 100%);
   --gradient-primary: linear-gradient(135deg, var(--primary) 0%, var(--primary-glow) 100%);
-  --gradient-water: linear-gradient(
-    180deg,
-    #f7fdff 0%,
-    #d7effb 52%,
-    #a3dff4 100%
-  );
+  --gradient-water: linear-gradient(180deg, #f7fdff 0%, #d7effb 52%, #a3dff4 100%);
 
   --shadow-soft: 0 10px 30px -12px oklch(0.34 0.15 251 / 0.2);
   --shadow-glow: 0 20px 60px -20px oklch(0.49 0.15 218 / 0.42);

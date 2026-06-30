@@ -38,7 +38,13 @@ function LeafParticles() {
   return (
     <instancedMesh ref={meshRef} args={[undefined, undefined, count]}>
       <coneGeometry args={[1, 2, 3]} />
-      <meshPhysicalMaterial color="#67B346" roughness={0.3} metalness={0.1} emissive="#3a8a28" emissiveIntensity={0.4} />
+      <meshPhysicalMaterial
+        color="#67B346"
+        roughness={0.3}
+        metalness={0.1}
+        emissive="#3a8a28"
+        emissiveIntensity={0.4}
+      />
     </instancedMesh>
   );
 }
@@ -85,7 +91,13 @@ export function Globe3D() {
           ].map((c, i) => (
             <mesh key={i} position={c.pos}>
               <sphereGeometry args={[c.s, 8, 8]} />
-              <meshPhysicalMaterial color="#67B346" roughness={0.5} metalness={0.1} emissive="#3a8a28" emissiveIntensity={0.2} />
+              <meshPhysicalMaterial
+                color="#67B346"
+                roughness={0.5}
+                metalness={0.1}
+                emissive="#3a8a28"
+                emissiveIntensity={0.2}
+              />
             </mesh>
           ))}
 

@@ -20,7 +20,9 @@ function AnimatedWave() {
     <div className="absolute inset-x-0 bottom-0 pointer-events-none">
       <svg viewBox="0 0 1440 120" preserveAspectRatio="none" className="w-full h-24 md:h-32">
         <motion.path
-          initial={{ d: "M0,60L60,65C120,70,240,80,360,80C480,80,600,70,720,64C840,58,960,58,1080,63C1200,68,1320,78,1380,83L1440,88L1440,120L0,120Z" }}
+          initial={{
+            d: "M0,60L60,65C120,70,240,80,360,80C480,80,600,70,720,64C840,58,960,58,1080,63C1200,68,1320,78,1380,83L1440,88L1440,120L0,120Z",
+          }}
           animate={{
             d: [
               "M0,60L60,65C120,70,240,80,360,80C480,80,600,70,720,64C840,58,960,58,1080,63C1200,68,1320,78,1380,83L1440,88L1440,120L0,120Z",
@@ -71,12 +73,14 @@ function FloatingDroplets() {
   );
 }
 
-
 export function Hero() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [showVideo, setShowVideo] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start start", "end start"] });
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end start"],
+  });
   const textY = useTransform(scrollYProgress, [0, 1], [0, -40]);
   const opacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
 
@@ -86,10 +90,11 @@ export function Hero() {
       !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (!canUseVideo) return;
     const loadVideo = () => setShowVideo(true);
-    const idleWindow = window as Window & typeof globalThis & {
-      cancelIdleCallback?: (id: number) => void;
-      requestIdleCallback?: (callback: () => void, options?: { timeout: number }) => number;
-    };
+    const idleWindow = window as Window &
+      typeof globalThis & {
+        cancelIdleCallback?: (id: number) => void;
+        requestIdleCallback?: (callback: () => void, options?: { timeout: number }) => number;
+      };
     const canUseIdleCallback = typeof idleWindow.requestIdleCallback === "function";
     const idleId = canUseIdleCallback
       ? idleWindow.requestIdleCallback?.(loadVideo, { timeout: 1200 })
@@ -128,13 +133,22 @@ export function Hero() {
   return (
     <section ref={sectionRef} id="top" className="relative overflow-hidden pt-24 min-h-screen">
       {/* Background image */}
-      <img src={waterSplash} alt="" className="absolute inset-0 h-full w-full object-cover" aria-hidden />
-      
+      <img
+        src={waterSplash}
+        alt=""
+        className="absolute inset-0 h-full w-full object-cover"
+        aria-hidden
+      />
+
       {/* Background video */}
       {showVideo && (
         <video
           ref={videoRef}
-          autoPlay muted loop playsInline preload="none"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="none"
           poster={waterSplash}
           disablePictureInPicture
           className="pointer-events-none absolute inset-0 hidden h-full w-full object-cover md:block"
@@ -146,7 +160,7 @@ export function Hero() {
 
       {/* Gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-br from-background/96 via-background/82 to-secondary/15" />
-      
+
       {/* Water-inspired radial glow */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_70%_40%,oklch(0.56_0.15_218/0.12),transparent)]" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_50%_at_30%_60%,oklch(0.47_0.15_145/0.08),transparent)]" />
@@ -161,7 +175,10 @@ export function Hero() {
         {/* Left: text */}
         <motion.div style={{ y: textY }}>
           <motion.span
-            variants={fadeUp} initial="hidden" animate="show" custom={0.1}
+            variants={fadeUp}
+            initial="hidden"
+            animate="show"
+            custom={0.1}
             className="inline-flex items-center gap-2 rounded-full border border-secondary/25 bg-background/75 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-secondary backdrop-blur"
           >
             <motion.span
@@ -173,7 +190,10 @@ export function Hero() {
           </motion.span>
 
           <motion.h1
-            variants={fadeUp} initial="hidden" animate="show" custom={0.22}
+            variants={fadeUp}
+            initial="hidden"
+            animate="show"
+            custom={0.22}
             className="mt-6 text-balance font-display text-5xl font-extrabold leading-[1.05] tracking-tight text-foreground sm:text-6xl md:text-7xl"
           >
             Pure water.
@@ -189,7 +209,10 @@ export function Hero() {
           </motion.h1>
 
           <motion.p
-            variants={fadeUp} initial="hidden" animate="show" custom={0.36}
+            variants={fadeUp}
+            initial="hidden"
+            animate="show"
+            custom={0.36}
             className="mt-6 max-w-lg text-lg text-muted-foreground"
           >
             Krio-H₂O delivers clean, mineral-balanced drinking water across Telangana — from a
@@ -198,16 +221,21 @@ export function Hero() {
           </motion.p>
 
           <motion.div
-            variants={fadeUp} initial="hidden" animate="show" custom={0.48}
+            variants={fadeUp}
+            initial="hidden"
+            animate="show"
+            custom={0.48}
             className="mt-8 flex flex-wrap items-center gap-3"
           >
             <Button
-              asChild size="lg"
+              asChild
+              size="lg"
               className="bg-gradient-primary shadow-glow hover:opacity-95 hover:scale-[1.02] transition-all duration-300 relative overflow-hidden group"
             >
               <a href="#contact">
                 <span className="relative z-10 flex items-center gap-2">
-                  Order water <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                  Order water{" "}
+                  <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
                 </span>
                 <motion.span
                   className="absolute inset-0 bg-white/10"
@@ -218,7 +246,9 @@ export function Hero() {
               </a>
             </Button>
             <Button
-              asChild size="lg" variant="outline"
+              asChild
+              size="lg"
+              variant="outline"
               className="border-primary/20 bg-background/75 backdrop-blur hover:border-secondary/40 hover:bg-accent/70 transition-all duration-300"
             >
               <a href="#products">Explore range</a>
@@ -226,7 +256,10 @@ export function Hero() {
           </motion.div>
 
           <motion.div
-            variants={fadeUp} initial="hidden" animate="show" custom={0.6}
+            variants={fadeUp}
+            initial="hidden"
+            animate="show"
+            custom={0.6}
             className="mt-10 flex flex-wrap items-center gap-6 text-sm text-muted-foreground"
           >
             <div className="flex items-center gap-2">
@@ -236,7 +269,8 @@ export function Hero() {
               <Leaf className="h-4 w-4 text-secondary" /> Eco-friendly packaging
             </div>
             <div className="hidden items-center gap-2 sm:flex">
-              <Droplets className="h-4 w-4 text-primary/60" /> Trusted by HDFC, LIC, Bajaj &amp; more
+              <Droplets className="h-4 w-4 text-primary/60" /> Trusted by HDFC, LIC, Bajaj &amp;
+              more
             </div>
           </motion.div>
         </motion.div>

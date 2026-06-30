@@ -9,8 +9,12 @@ import bottle2LUrl from "@/assets/krio_h2o_5_models_pack/krio_h2o_2litre.glb?url
 import bottle20LUrl from "@/assets/krio_h2o_5_models_pack/krio_h2o_20litre.glb?url";
 import { motion, AnimatePresence } from "framer-motion";
 
-const SceneCanvas = lazy(() => import("./three/SceneCanvas").then((mod) => ({ default: mod.SceneCanvas })));
-const BottleModel = lazy(() => import("./three/BottleModel").then((mod) => ({ default: mod.BottleModel })));
+const SceneCanvas = lazy(() =>
+  import("./three/SceneCanvas").then((mod) => ({ default: mod.SceneCanvas })),
+);
+const BottleModel = lazy(() =>
+  import("./three/BottleModel").then((mod) => ({ default: mod.BottleModel })),
+);
 
 const SIZES = [
   {
@@ -63,7 +67,7 @@ const MODEL_OPTIONS: BottleModelOption[] = [
   { model: bottle500mlUrl, scale: 0.32, rotation: [-1.3, 0, 0.06] },
   { model: bottle1LUrl, scale: 0.37, rotation: [-1.4, 0, 0.08] },
   { model: bottle2LUrl, scale: 0.37, rotation: [-1.18, 0, 0.1] },
-  { model: bottle20LUrl, scale: 3.90, rotation: [0, 0, 0.14] },
+  { model: bottle20LUrl, scale: 3.9, rotation: [0, 0, 0.14] },
 ];
 
 export function Products() {
@@ -124,20 +128,23 @@ export function Products() {
                     transition={{ duration: 0.4, ease: [0.43, 0.13, 0.23, 0.96] }}
                   >
                     <Suspense
-                  fallback={
-                    <div className="absolute inset-0 grid place-items-center text-sm text-muted-foreground">
-                      Loading 3D preview…
-                    </div>
-                  }
-                >
-                  <SceneCanvas className="relative h-full w-full" camera={{ position: [0, 0.7, 6], fov: 28 }}>
-                    <BottleModel
-                      modelUrl={MODEL_OPTIONS[active].model}
-                      scale={MODEL_OPTIONS[active].scale}
-                      rotation={MODEL_OPTIONS[active].rotation}
-                    />
-                  </SceneCanvas>
-                </Suspense>
+                      fallback={
+                        <div className="absolute inset-0 grid place-items-center text-sm text-muted-foreground">
+                          Loading 3D preview…
+                        </div>
+                      }
+                    >
+                      <SceneCanvas
+                        className="relative h-full w-full"
+                        camera={{ position: [0, 0.7, 6], fov: 28 }}
+                      >
+                        <BottleModel
+                          modelUrl={MODEL_OPTIONS[active].model}
+                          scale={MODEL_OPTIONS[active].scale}
+                          rotation={MODEL_OPTIONS[active].rotation}
+                        />
+                      </SceneCanvas>
+                    </Suspense>
                   </motion.div>
                 </AnimatePresence>
                 <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-background/95 via-background/70 to-transparent p-6">
@@ -252,7 +259,10 @@ export function Products() {
                       />
                     </button>
                     {i === active ? (
-                      <motion.div layoutId="active-size-line" className="mx-4 h-px bg-gradient-primary">
+                      <motion.div
+                        layoutId="active-size-line"
+                        className="mx-4 h-px bg-gradient-primary"
+                      >
                         {null}
                       </motion.div>
                     ) : null}

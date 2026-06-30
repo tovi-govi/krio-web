@@ -28,7 +28,13 @@ export function EyeIcon3D() {
       </mesh>
       <mesh position={[0.06, 0.05, 0.22]}>
         <sphereGeometry args={[0.03, 8, 8]} />
-        <meshPhysicalMaterial color="#ffffff" roughness={0} metalness={0} emissive="#ffffff" emissiveIntensity={2} />
+        <meshPhysicalMaterial
+          color="#ffffff"
+          roughness={0}
+          metalness={0}
+          emissive="#ffffff"
+          emissiveIntensity={2}
+        />
       </mesh>
     </group>
   );
@@ -59,13 +65,35 @@ export function TargetIcon3D() {
       </mesh>
       <mesh ref={innerRef}>
         <sphereGeometry args={[0.09, 16, 16]} />
-        <meshPhysicalMaterial color="#003B8F" roughness={0.1} metalness={0.6} emissive="#005CB9" emissiveIntensity={0.4} />
+        <meshPhysicalMaterial
+          color="#003B8F"
+          roughness={0.1}
+          metalness={0.6}
+          emissive="#005CB9"
+          emissiveIntensity={0.4}
+        />
       </mesh>
       {[
-        { pos: [0, 0.28, 0] as [number,number,number], rot: [0,0,0] as [number,number,number], size: [0.025, 0.1, 0.025] as [number,number,number] },
-        { pos: [0, -0.28, 0] as [number,number,number], rot: [0,0,0] as [number,number,number], size: [0.025, 0.1, 0.025] as [number,number,number] },
-        { pos: [0.28, 0, 0] as [number,number,number], rot: [0,0,0] as [number,number,number], size: [0.1, 0.025, 0.025] as [number,number,number] },
-        { pos: [-0.28, 0, 0] as [number,number,number], rot: [0,0,0] as [number,number,number], size: [0.1, 0.025, 0.025] as [number,number,number] },
+        {
+          pos: [0, 0.28, 0] as [number, number, number],
+          rot: [0, 0, 0] as [number, number, number],
+          size: [0.025, 0.1, 0.025] as [number, number, number],
+        },
+        {
+          pos: [0, -0.28, 0] as [number, number, number],
+          rot: [0, 0, 0] as [number, number, number],
+          size: [0.025, 0.1, 0.025] as [number, number, number],
+        },
+        {
+          pos: [0.28, 0, 0] as [number, number, number],
+          rot: [0, 0, 0] as [number, number, number],
+          size: [0.1, 0.025, 0.025] as [number, number, number],
+        },
+        {
+          pos: [-0.28, 0, 0] as [number, number, number],
+          rot: [0, 0, 0] as [number, number, number],
+          size: [0.1, 0.025, 0.025] as [number, number, number],
+        },
       ].map((c, i) => (
         <mesh key={i} position={c.pos}>
           <boxGeometry args={c.size} />
@@ -93,7 +121,13 @@ export function EarthLeafIcon3D() {
     <group ref={groupRef}>
       <mesh>
         <sphereGeometry args={[0.3, 24, 24]} />
-        <meshPhysicalMaterial color="#1a7fca" roughness={0.15} metalness={0.1} transparent opacity={0.85} />
+        <meshPhysicalMaterial
+          color="#1a7fca"
+          roughness={0.15}
+          metalness={0.1}
+          transparent
+          opacity={0.85}
+        />
       </mesh>
       <mesh rotation={[0, 0, 0]}>
         <torusGeometry args={[0.31, 0.015, 8, 32]} />
@@ -106,7 +140,13 @@ export function EarthLeafIcon3D() {
       <group ref={leafRef} position={[0.15, 0.25, 0.2]}>
         <mesh rotation={[0, 0, Math.PI / 5]}>
           <coneGeometry args={[0.11, 0.22, 3]} />
-          <meshPhysicalMaterial color="#67B346" roughness={0.3} metalness={0.1} emissive="#3a8a28" emissiveIntensity={0.3} />
+          <meshPhysicalMaterial
+            color="#67B346"
+            roughness={0.3}
+            metalness={0.1}
+            emissive="#3a8a28"
+            emissiveIntensity={0.3}
+          />
         </mesh>
       </group>
     </group>
@@ -127,15 +167,38 @@ export function DropletIcon3D() {
     <group ref={groupRef}>
       <mesh position={[0, -0.05, 0]}>
         <sphereGeometry args={[0.22, 16, 16]} />
-        <meshPhysicalMaterial color="#6ec6ff" roughness={0.02} metalness={0} transmission={0.7} thickness={1} ior={1.4} transparent opacity={0.9} />
+        <meshPhysicalMaterial
+          color="#6ec6ff"
+          roughness={0.02}
+          metalness={0}
+          transmission={0.7}
+          thickness={1}
+          ior={1.4}
+          transparent
+          opacity={0.9}
+        />
       </mesh>
       <mesh position={[0, 0.28, 0]} rotation={[0, 0, Math.PI]}>
         <coneGeometry args={[0.1, 0.22, 16]} />
-        <meshPhysicalMaterial color="#6ec6ff" roughness={0.02} transmission={0.7} thickness={0.5} ior={1.4} transparent opacity={0.9} />
+        <meshPhysicalMaterial
+          color="#6ec6ff"
+          roughness={0.02}
+          transmission={0.7}
+          thickness={0.5}
+          ior={1.4}
+          transparent
+          opacity={0.9}
+        />
       </mesh>
       <mesh position={[-0.06, 0.02, 0.18]}>
         <sphereGeometry args={[0.04, 8, 8]} />
-        <meshPhysicalMaterial color="#ffffff" roughness={0} metalness={0} emissive="#ffffff" emissiveIntensity={3} />
+        <meshPhysicalMaterial
+          color="#ffffff"
+          roughness={0}
+          metalness={0}
+          emissive="#ffffff"
+          emissiveIntensity={3}
+        />
       </mesh>
     </group>
   );
@@ -164,13 +227,16 @@ export function ShieldIcon3D() {
     return s;
   }, []);
 
-  const extrudeSettings = useMemo(() => ({
-    depth: 0.1,
-    bevelEnabled: true,
-    bevelSize: 0.03,
-    bevelThickness: 0.03,
-    bevelSegments: 3,
-  }), []);
+  const extrudeSettings = useMemo(
+    () => ({
+      depth: 0.1,
+      bevelEnabled: true,
+      bevelSize: 0.03,
+      bevelThickness: 0.03,
+      bevelSegments: 3,
+    }),
+    [],
+  );
 
   return (
     <group ref={groupRef}>
@@ -181,12 +247,22 @@ export function ShieldIcon3D() {
       {/* checkmark left stroke */}
       <mesh position={[-0.07, -0.06, 0.12]} rotation={[0, 0, -0.6]}>
         <boxGeometry args={[0.16, 0.055, 0.055]} />
-        <meshPhysicalMaterial color="#ffffff" roughness={0.2} emissive="#ffffff" emissiveIntensity={0.5} />
+        <meshPhysicalMaterial
+          color="#ffffff"
+          roughness={0.2}
+          emissive="#ffffff"
+          emissiveIntensity={0.5}
+        />
       </mesh>
       {/* checkmark right stroke */}
       <mesh position={[0.07, 0.02, 0.12]} rotation={[0, 0, 0.85]}>
         <boxGeometry args={[0.055, 0.26, 0.055]} />
-        <meshPhysicalMaterial color="#ffffff" roughness={0.2} emissive="#ffffff" emissiveIntensity={0.5} />
+        <meshPhysicalMaterial
+          color="#ffffff"
+          roughness={0.2}
+          emissive="#ffffff"
+          emissiveIntensity={0.5}
+        />
       </mesh>
     </group>
   );
@@ -221,7 +297,12 @@ export function TruckIcon3D() {
       ))}
       <mesh position={[-0.25, 0.06, 0.05]}>
         <sphereGeometry args={[0.035, 8, 8]} />
-        <meshPhysicalMaterial color="#ffff99" emissive="#ffff88" emissiveIntensity={2} roughness={0} />
+        <meshPhysicalMaterial
+          color="#ffff99"
+          emissive="#ffff88"
+          emissiveIntensity={2}
+          roughness={0}
+        />
       </mesh>
     </group>
   );

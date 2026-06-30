@@ -64,7 +64,8 @@ export function About() {
               <div className="flex-1 pt-2">
                 <h3 className="font-display text-lg font-bold text-foreground">Our Vision</h3>
                 <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                  To become a trusted leader in drinking water solutions across Telangana and beyond.
+                  To become a trusted leader in drinking water solutions across Telangana and
+                  beyond.
                 </p>
               </div>
             </div>

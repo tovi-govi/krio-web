@@ -1,5 +1,13 @@
 import { useMemo, useRef } from "react";
-import { Center, Float, GLTF, HemisphereLight, OrbitControls, useGLTF, useTexture } from "@react-three/drei";
+import {
+  Center,
+  Float,
+  GLTF,
+  HemisphereLight,
+  OrbitControls,
+  useGLTF,
+  useTexture,
+} from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import type { Group, Material, Mesh, Texture } from "three";
 import { MeshPhysicalMaterial } from "three";
@@ -65,7 +73,8 @@ export function BottleModel({
         // Apply improved material handling for a more premium plastic look
         const applyMaterial = (mat: Material) => {
           const lname = (mesh.name || "").toLowerCase();
-          const isLabelMesh = lname.includes("label") || lname.includes("sticker") || lname.includes("wrap");
+          const isLabelMesh =
+            lname.includes("label") || lname.includes("sticker") || lname.includes("wrap");
           const isWaterMesh = lname.includes("water");
           const m = flipMaterialText(mat);
 
@@ -88,7 +97,13 @@ export function BottleModel({
               return waterMat as unknown as Material;
             }
 
-            if (lname.includes("bottle") || lname.includes("body") || lname.includes("jug") || lname.includes("container") || lname.includes("shell")) {
+            if (
+              lname.includes("bottle") ||
+              lname.includes("body") ||
+              lname.includes("jug") ||
+              lname.includes("container") ||
+              lname.includes("shell")
+            ) {
               const baseMap = (m as any).map || null;
               return new MeshPhysicalMaterial({
                 transparent: true,
@@ -171,12 +186,7 @@ export function BottleModel({
       <directionalLight position={[4, 8, 5]} intensity={1.15} />
       <directionalLight position={[-3, 2, -2]} intensity={0.65} />
 
-      <Float
-        speed={1.05}
-        floatIntensity={0.3}
-        rotationIntensity={0}
-        floatingRange={[0.07, 0.12]}
-      >
+      <Float speed={1.05} floatIntensity={0.3} rotationIntensity={0} floatingRange={[0.07, 0.12]}>
         <group ref={spinRef}>
           <group rotation={rotation}>
             <Center>
@@ -200,4 +210,3 @@ export function BottleModel({
     </group>
   );
 }
-

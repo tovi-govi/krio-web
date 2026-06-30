@@ -23,7 +23,6 @@ export function useRevealOnScroll<T extends HTMLElement>(revealPoint = 0.78) {
         nextVisible = true;
       }
 
-
       if (nextVisible !== lastVisible) {
         lastVisible = nextVisible;
         setIsVisible(nextVisible);
