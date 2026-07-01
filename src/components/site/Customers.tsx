@@ -94,50 +94,42 @@ export function Customers() {
           </h2>
         </ScrollReveal>
 
-        <div className="mx-auto mt-14 grid max-w-5xl grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4 lg:hidden">
-          {FEATURED_CUSTOMERS.map((c, i) => {
-            const delay = 0.08 + i * 0.06;
-            const exitDelay = (FEATURED_CUSTOMERS.length - 1 - i) * 0.02;
+        <ScrollReveal
+          show={isVisible}
+          delay={0.12}
+          exitDelay={0.04}
+          className="mx-auto mt-12 max-w-6xl overflow-hidden py-8 lg:hidden"
+        >
+          <LogoLoop
+            logos={CUSTOMER_LOGOS}
+            speed={50}
+            direction="left"
+            logoHeight={52}
+            gap={28}
+            hoverSpeed={14}
+            scaleOnHover
+            fadeOut
+            fadeOutColor="#004c8f"
+            ariaLabel="Customer logos"
+            renderItem={(item) => {
+              if (!("src" in item)) return null;
 
-            return (
-              <ScrollReveal
-                key={c.name}
-                show={isVisible}
-                delay={delay}
-                exitDelay={exitDelay}
-                fromScale
-                whileHover={{ y: -4, backgroundColor: "rgba(255,255,255,0.16)" }}
-                className="flex h-28 cursor-default flex-col items-center justify-center gap-2 rounded-xl border border-white/15 bg-white/10 px-4 text-center shadow-soft backdrop-blur"
-              >
-                {c.logo && (
-                  <span className="flex h-12 w-full items-center justify-center overflow-hidden rounded-lg bg-white px-3 py-2">
-                    <img
-                      src={c.logo}
-                      alt={`${c.name} logo`}
-                      loading="lazy"
-                      decoding="async"
-                      className={`max-h-8 w-auto max-w-full object-contain ${c.logoClassName ?? ""}`}
-                    />
-                  </span>
-                )}
-                {c.monogram && (
-                  <span className="flex h-12 w-full items-center justify-center rounded-lg bg-white px-3 py-2 text-[#5b2f16]">
-                    <span className="flex items-center gap-2">
-                      <span className="font-display text-xl font-extrabold leading-none">
-                        {c.monogram}
-                      </span>
-                      <span className="h-6 w-px bg-[#d6a75f]" />
-                      <span className="text-[10px] font-bold uppercase tracking-wide">
-                        {c.label}
-                      </span>
-                    </span>
-                  </span>
-                )}
-                <span className="text-xs font-semibold leading-tight text-white/90">{c.name}</span>
-              </ScrollReveal>
-            );
-          })}
-        </div>
+              return (
+                <span className="flex h-16 w-36 items-center justify-center overflow-hidden rounded-lg border border-white/20 bg-white px-3 py-2 shadow-soft">
+                  <img
+                    src={item.src}
+                    alt={item.alt ?? ""}
+                    title={item.title}
+                    loading="lazy"
+                    decoding="async"
+                    draggable={false}
+                    className={`max-h-10 w-auto max-w-full object-contain ${item.className ?? ""}`}
+                  />
+                </span>
+              );
+            }}
+          />
+        </ScrollReveal>
 
         <ScrollReveal
           show={isVisible}
@@ -174,35 +166,6 @@ export function Customers() {
               );
             }}
           />
-        </ScrollReveal>
-
-        <ScrollReveal
-          show={isVisible}
-          delay={0.44}
-          exitDelay={0.04}
-          className="mx-auto mt-8 max-w-5xl lg:hidden"
-        >
-          <ul className="grid grid-cols-1 gap-2 text-sm sm:grid-cols-2">
-            {ADDITIONAL_CUSTOMERS.map((customer) => (
-              <li
-                key={customer.name}
-                className="flex min-h-14 items-center gap-3 rounded-lg border border-white/10 bg-white/[0.07] px-3 py-2 font-semibold leading-tight text-white/90"
-              >
-                {customer.logo && (
-                  <span className="flex h-10 w-24 shrink-0 items-center justify-center overflow-hidden rounded-md bg-white px-2 py-1.5">
-                    <img
-                      src={customer.logo}
-                      alt={`${customer.name} logo`}
-                      loading="lazy"
-                      decoding="async"
-                      className={`max-h-7 w-auto max-w-full object-contain ${customer.logoClassName ?? ""}`}
-                    />
-                  </span>
-                )}
-                <span>{customer.name}</span>
-              </li>
-            ))}
-          </ul>
         </ScrollReveal>
 
         <div className="mx-auto mt-14 grid max-w-5xl grid-cols-2 gap-px overflow-hidden rounded-xl border border-white/15 bg-white/10 sm:grid-cols-4">
